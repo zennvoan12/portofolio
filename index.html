@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Han Nov — Creative Developer & AI Engineer</title>
+  <title>Farhan (Han Nov) — Full-Stack & AI Systems Engineer</title>
   
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -20,6 +20,7 @@
           fontFamily: {
             sans: ['Plus Jakarta Sans', 'sans-serif'],
             heading: ['Syne', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
           },
           colors: {
             brand: {
@@ -56,17 +57,16 @@
 
   <style>
     body {
-      background-color: #090a0f;
+      background-color: #08090d;
       color: #f3f4f6;
       overflow-x: hidden;
     }
 
-    /* Glassmorphism */
     .glass-card {
-      background: rgba(18, 20, 29, 0.6);
+      background: rgba(15, 17, 26, 0.65);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.07);
       box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
     }
     
@@ -76,38 +76,22 @@
     }
 
     .glass-nav {
-      background: rgba(9, 10, 15, 0.75);
+      background: rgba(8, 9, 13, 0.8);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    /* Gradient Text */
     .text-gradient {
-      background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 50%, #8b5cf6 100%);
+      background: linear-gradient(135deg, #ffffff 0%, #c7d2fe 45%, #818cf8 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .text-gradient-cyan {
-      background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+    .text-gradient-purple {
+      background: linear-gradient(135deg, #c084fc 0%, #818cf8 50%, #38bdf8 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-    }
-
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #090a0f;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #1f2937;
-      border-radius: 4px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #4f46e5;
     }
 
     #webgl-canvas {
@@ -126,27 +110,28 @@
   <!-- 3D WebGL Background Canvas -->
   <canvas id="webgl-canvas"></canvas>
 
-  <!-- Background Ambient Lights -->
-  <div class="fixed top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-purple-600/20 rounded-full blur-[120px] pointer-events-none z-0"></div>
-  <div class="fixed bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-[30rem] h-[30rem] bg-indigo-600/15 rounded-full blur-[140px] pointer-events-none z-0"></div>
+  <!-- Ambient Glow Backgrounds -->
+  <div class="fixed top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-purple-600/15 rounded-full blur-[130px] pointer-events-none z-0"></div>
+  <div class="fixed bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-[32rem] h-[32rem] bg-indigo-600/10 rounded-full blur-[150px] pointer-events-none z-0"></div>
 
   <!-- Navigation -->
   <header class="fixed top-0 left-0 right-0 z-50 glass-nav transition-all duration-300">
     <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
       <a href="#" class="font-heading font-extrabold text-2xl tracking-tight text-white flex items-center gap-2">
         <span class="w-3 h-3 rounded-full bg-indigo-500 animate-pulse"></span>
-        HAN<span class="text-indigo-400">NOV</span>
+        FARHAN<span class="text-indigo-400 font-mono text-sm font-normal">.dev</span>
       </a>
 
       <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
         <a href="#about" class="hover:text-indigo-400 transition-colors">About</a>
         <a href="#projects" class="hover:text-indigo-400 transition-colors">Projects</a>
         <a href="#skills" class="hover:text-indigo-400 transition-colors">Tech Stack</a>
+        <a href="#live-stack" class="hover:text-indigo-400 transition-colors">Infrastructure</a>
         <a href="#contact" class="hover:text-indigo-400 transition-colors">Contact</a>
       </nav>
 
       <a href="#contact" class="px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/10 text-white text-sm font-semibold transition-all duration-300 hover:scale-105 backdrop-blur-md flex items-center gap-2">
-        <span>Let's Talk</span>
+        <span>Let's Connect</span>
         <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
       </a>
     </div>
@@ -156,7 +141,7 @@
   <main class="relative z-10 pt-20">
 
     <!-- HERO SECTION -->
-    <section class="min-h-[90vh] flex items-center justify-center relative px-6 py-20">
+    <section class="min-h-[92vh] flex items-center justify-center relative px-6 py-20">
       <div class="max-w-4xl mx-auto text-center space-y-8">
         
         <!-- Status Badge -->
@@ -165,42 +150,45 @@
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
             <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
           </span>
-          Available for New Projects & Collaborations
+          Open for Software Engineering & AI Integration Roles
         </div>
 
         <!-- Headline -->
-        <h1 class="font-heading font-extrabold text-5xl md:text-7xl lg:text-8xl tracking-tight leading-[1.1] text-gradient">
-          Crafting Digital Experience & AI Solutions
+        <h1 class="font-heading font-extrabold text-5xl md:text-7xl lg:text-8xl tracking-tight leading-[1.08] text-gradient">
+          Building Scalable Web & Autonomous AI Systems
         </h1>
 
         <!-- Subheading -->
         <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto font-normal leading-relaxed">
-          Full Stack Developer & AI Engineer specialize in high-performance web systems, modern user interfaces, and intelligent automation.
+          Hi, saya <span class="text-white font-medium">Farhan (Han Nov)</span>. Software Developer & AI Researcher yang fokus menghubungkan arsitektur web performa tinggi dengan kecerdasan buatan terapan.
         </p>
 
         <!-- CTA Action Buttons -->
-        <div class="flex flex-wrap items-center justify-center gap-4 pt-4">
+        <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
           <a href="#projects" class="px-8 py-4 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold shadow-lg shadow-indigo-600/30 hover:shadow-indigo-500/50 transition-all duration-300 hover:-translate-y-1 flex items-center gap-3">
-            <span>Explore Work</span>
+            <span>Lihat Proyek & Riset</span>
             <i data-lucide="sparkles" class="w-5 h-5"></i>
           </a>
           <a href="#contact" class="px-8 py-4 rounded-2xl glass-card text-white font-semibold hover:bg-white/10 transition-all duration-300 hover:-translate-y-1 flex items-center gap-3">
-            <span>Get in Touch</span>
+            <span>Hubungi Saya</span>
             <i data-lucide="mail" class="w-5 h-5"></i>
           </a>
         </div>
 
-        <!-- Social Quick Links -->
-        <div class="flex items-center justify-center gap-6 pt-8 text-gray-400">
-          <a href="https://github.com" target="_blank" class="hover:text-white transition-colors p-2 glass-card rounded-xl">
-            <i data-lucide="github" class="w-5 h-5"></i>
-          </a>
-          <a href="https://linkedin.com" target="_blank" class="hover:text-white transition-colors p-2 glass-card rounded-xl">
-            <i data-lucide="linkedin" class="w-5 h-5"></i>
-          </a>
-          <a href="mailto:contact@quantum.com" class="hover:text-white transition-colors p-2 glass-card rounded-xl">
-            <i data-lucide="mail" class="w-5 h-5"></i>
-          </a>
+        <!-- Metric Counters -->
+        <div class="grid grid-cols-3 gap-4 max-w-2xl mx-auto pt-10 border-t border-white/5">
+          <div>
+            <div class="font-heading text-3xl md:text-4xl font-extrabold text-white">200+</div>
+            <div class="text-xs text-gray-400 mt-1">Real Tx Mining Data</div>
+          </div>
+          <div>
+            <div class="font-heading text-3xl md:text-4xl font-extrabold text-indigo-400">2.45</div>
+            <div class="text-xs text-gray-400 mt-1">Apriori Lift Ratio</div>
+          </div>
+          <div>
+            <div class="font-heading text-3xl md:text-4xl font-extrabold text-emerald-400">24/7</div>
+            <div class="text-xs text-gray-400 mt-1">VPS AI Cloud Uptime</div>
+          </div>
         </div>
 
       </div>
@@ -211,52 +199,49 @@
     <section id="about" class="py-24 px-6 relative max-w-7xl mx-auto">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         
-        <!-- Bio Card -->
         <div class="lg:col-span-7 space-y-6">
           <div class="inline-flex items-center gap-2 text-indigo-400 font-semibold text-sm tracking-wider uppercase">
-            <i data-lucide="user" class="w-4 h-4"></i> About Me
+            <i data-lucide="user" class="w-4 h-4"></i> Profil & Latar Belakang
           </div>
           <h2 class="font-heading text-4xl md:text-5xl font-bold text-white tracking-tight">
-            Driven by curiosity, powered by code.
+            Pragmatic Developer with Research Precision.
           </h2>
           <p class="text-gray-300 text-base md:text-lg leading-relaxed">
-            Saya seorang pengembang perangkat lunak yang berfokus pada arsitektur web modern, integrasi kecerdasan buatan, dan optimasi algoritma. Dari sistem e-commerce berskala tinggi hingga integrasi agen LLM mandiri.
+            Fokus utama saya adalah membangun aplikasi web end-to-end yang tangguh, clean code, serta mengintegrasikan algoritma data mining dan model LLM terkini ke dalam produk nyata.
           </p>
-
-          <!-- Highlights Grid -->
-          <div class="grid grid-cols-2 gap-4 pt-4">
-            <div class="glass-card p-5 rounded-2xl border-l-4 border-l-indigo-500">
-              <div class="text-3xl font-extrabold text-white font-heading">200+</div>
-              <div class="text-xs text-gray-400 mt-1">Transactions Processed</div>
-            </div>
-            <div class="glass-card p-5 rounded-2xl border-l-4 border-l-purple-500">
-              <div class="text-3xl font-extrabold text-white font-heading">99.9%</div>
-              <div class="text-xs text-gray-400 mt-1">Uptime Architecture</div>
-            </div>
-          </div>
+          <p class="text-gray-400 text-sm md:text-base leading-relaxed">
+            Berpengalaman dalam pengembangan e-commerce berbasis Laravel 11, data mining association rules (Apriori), orkestrasi agent AI otonom, dan deployment production di AWS cloud infrastructure.
+          </p>
         </div>
 
-        <!-- Visual Interactive Badge Frame -->
-        <div class="lg:col-span-5 relative">
-          <div class="glass-card p-8 rounded-3xl relative overflow-hidden group">
-            <div class="absolute -right-10 -top-10 w-40 h-40 bg-indigo-500/20 rounded-full blur-3xl group-hover:bg-indigo-500/40 transition-all duration-500"></div>
-            
-            <div class="space-y-6 relative z-10">
-              <div class="w-16 h-16 rounded-2xl bg-indigo-600/30 border border-indigo-500/50 flex items-center justify-center text-indigo-300">
-                <i data-lucide="code-2" class="w-8 h-8"></i>
-              </div>
-              <h3 class="font-heading text-2xl font-bold text-white">Full-Stack Core</h3>
-              <p class="text-sm text-gray-400 leading-relaxed">
-                Spesialisasi mencakup Laravel 11, React/Next.js, Python AI Agents, MySQL/SQLite optimization, dan deployment cloud VPS.
-              </p>
+        <div class="lg:col-span-5 space-y-4">
+          <div class="glass-card p-6 rounded-2xl flex items-start gap-4">
+            <div class="w-12 h-12 rounded-xl bg-indigo-500/20 text-indigo-400 flex items-center justify-center shrink-0">
+              <i data-lucide="layers" class="w-6 h-6"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold text-white">Full-Stack Architecture</h3>
+              <p class="text-xs text-gray-400 mt-1">Laravel 11, PHP 8.3, MySQL, Tailwind CSS, RESTful API & Unit Testing.</p>
+            </div>
+          </div>
 
-              <div class="flex flex-wrap gap-2 pt-2">
-                <span class="px-3 py-1 text-xs font-medium rounded-lg bg-white/5 border border-white/10 text-gray-300">Laravel 11</span>
-                <span class="px-3 py-1 text-xs font-medium rounded-lg bg-white/5 border border-white/10 text-gray-300">PHP 8.3</span>
-                <span class="px-3 py-1 text-xs font-medium rounded-lg bg-white/5 border border-white/10 text-gray-300">Python AI</span>
-                <span class="px-3 py-1 text-xs font-medium rounded-lg bg-white/5 border border-white/10 text-gray-300">Tailwind CSS</span>
-                <span class="px-3 py-1 text-xs font-medium rounded-lg bg-white/5 border border-white/10 text-gray-300">Docker</span>
-              </div>
+          <div class="glass-card p-6 rounded-2xl flex items-start gap-4">
+            <div class="w-12 h-12 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center shrink-0">
+              <i data-lucide="brain" class="w-6 h-6"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold text-white">Data Mining & AI Agents</h3>
+              <p class="text-xs text-gray-400 mt-1">Apriori Market Basket Analysis, Multi-Agent Autonomous Orchestration, LLM Prompt Engineering.</p>
+            </div>
+          </div>
+
+          <div class="glass-card p-6 rounded-2xl flex items-start gap-4">
+            <div class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+              <i data-lucide="server" class="w-6 h-6"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold text-white">DevOps & Cloud Deployment</h3>
+              <p class="text-xs text-gray-400 mt-1">AWS EC2, Docker Containerization, Tailscale Mesh Network, Git CI/CD Automation.</p>
             </div>
           </div>
         </div>
@@ -269,45 +254,42 @@
     <section id="projects" class="py-24 px-6 relative max-w-7xl mx-auto">
       <div class="text-center space-y-4 mb-16">
         <div class="inline-flex items-center gap-2 text-indigo-400 font-semibold text-sm tracking-wider uppercase">
-          <i data-lucide="folder-git-2" class="w-4 h-4"></i> Portfolio Showcase
+          <i data-lucide="folder-git-2" class="w-4 h-4"></i> Selected Projects & Research
         </div>
         <h2 class="font-heading text-4xl md:text-5xl font-bold text-white">
-          Selected Projects & Case Studies
+          Karya Pilihan & Implementasi Nyata
         </h2>
         <p class="text-gray-400 max-w-xl mx-auto">
-          Koleksi proyek nyata dengan fokus pada performa tinggi, UX intuitif, dan arsitektur bersih.
+          Mulai dari sistem riset algoritma e-commerce hingga orkestrasi bot & AI gateway 24/7.
         </p>
       </div>
 
-      <!-- Project Cards Grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-        <!-- Project 1: Quantum Cell -->
+        <!-- Project 1: Quantum Cell & Apriori -->
         <div class="glass-card rounded-3xl p-6 flex flex-col justify-between group hover:-translate-y-2 transition-all duration-300 relative">
           <div class="space-y-4">
             <div class="w-full h-48 rounded-2xl bg-gradient-to-br from-indigo-900/60 to-purple-900/40 border border-white/10 flex items-center justify-center relative overflow-hidden group-hover:border-indigo-500/40 transition-colors">
-              <i data-lucide="shopping-bag" class="w-16 h-16 text-indigo-400/60 group-hover:scale-110 group-hover:text-indigo-400 transition-all duration-500"></i>
+              <i data-lucide="shopping-cart" class="w-16 h-16 text-indigo-400/60 group-hover:scale-110 group-hover:text-indigo-400 transition-all duration-500"></i>
               <div class="absolute top-4 right-4 bg-indigo-500/20 backdrop-blur-md text-indigo-300 text-xs px-3 py-1 rounded-full font-medium border border-indigo-500/30">
-                E-Commerce
+                TA Research / Web
               </div>
             </div>
             
             <h3 class="font-heading text-2xl font-bold text-white group-hover:text-indigo-300 transition-colors">
-              Quantum Cell Store
+              Quantum Cell Store & Apriori Engine
             </h3>
-            <p class="text-sm text-gray-400 line-clamp-3">
-              E-commerce modern berbasis Laravel 11 dengan rekomendasi produk pintar menggunakan Algoritma Apriori Data Mining.
+            <p class="text-sm text-gray-400 leading-relaxed">
+              Platform e-commerce dengan mesin rekomendasi produk cerdas berbasis algoritma Data Mining Apriori, diuji dengan dataset 200+ transaksi dan lift ratio 2.45.
             </p>
           </div>
 
           <div class="pt-6 mt-6 border-t border-white/5 flex items-center justify-between">
-            <div class="flex gap-2">
-              <span class="text-xs text-indigo-400 font-semibold bg-indigo-500/10 px-2.5 py-1 rounded-md">Laravel</span>
-              <span class="text-xs text-purple-400 font-semibold bg-purple-500/10 px-2.5 py-1 rounded-md">Apriori</span>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="text-[11px] text-indigo-400 font-semibold bg-indigo-500/10 px-2 py-0.5 rounded">Laravel 11</span>
+              <span class="text-[11px] text-purple-400 font-semibold bg-purple-500/10 px-2 py-0.5 rounded">Apriori</span>
+              <span class="text-[11px] text-gray-400 font-semibold bg-white/5 px-2 py-0.5 rounded">MySQL</span>
             </div>
-            <a href="#" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1 text-xs font-semibold">
-              Detail <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-            </a>
           </div>
         </div>
 
@@ -317,58 +299,116 @@
             <div class="w-full h-48 rounded-2xl bg-gradient-to-br from-emerald-900/60 to-teal-900/40 border border-white/10 flex items-center justify-center relative overflow-hidden group-hover:border-emerald-500/40 transition-colors">
               <i data-lucide="bot" class="w-16 h-16 text-emerald-400/60 group-hover:scale-110 group-hover:text-emerald-400 transition-all duration-500"></i>
               <div class="absolute top-4 right-4 bg-emerald-500/20 backdrop-blur-md text-emerald-300 text-xs px-3 py-1 rounded-full font-medium border border-emerald-500/30">
-                AI / Agents
+                Autonomous AI
               </div>
             </div>
             
             <h3 class="font-heading text-2xl font-bold text-white group-hover:text-emerald-300 transition-colors">
-              Hermes AI Office Manager
+              Hermes AI Office Architecture
             </h3>
-            <p class="text-sm text-gray-400 line-clamp-3">
-              Sistem agen kecerdasan buatan otonom untuk otomatisasi alur kerja kantor, integrasi Obsidian vault, dan pelaporan otomatis.
+            <p class="text-sm text-gray-400 leading-relaxed">
+              Sistem manajerial otonom berbasis agent AI persona (Neko-chan, Research, Code, Admin) dengan integrasi otomatisasi Obsidian vault & cron log tracking.
             </p>
           </div>
 
           <div class="pt-6 mt-6 border-t border-white/5 flex items-center justify-between">
-            <div class="flex gap-2">
-              <span class="text-xs text-emerald-400 font-semibold bg-emerald-500/10 px-2.5 py-1 rounded-md">Python</span>
-              <span class="text-xs text-teal-400 font-semibold bg-teal-500/10 px-2.5 py-1 rounded-md">Hermes</span>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="text-[11px] text-emerald-400 font-semibold bg-emerald-500/10 px-2 py-0.5 rounded">Python</span>
+              <span class="text-[11px] text-teal-400 font-semibold bg-teal-500/10 px-2 py-0.5 rounded">Hermes Agent</span>
+              <span class="text-[11px] text-gray-400 font-semibold bg-white/5 px-2 py-0.5 rounded">Obsidian</span>
             </div>
-            <a href="#" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1 text-xs font-semibold">
-              Detail <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-            </a>
           </div>
         </div>
 
-        <!-- Project 3: 9Router Cloud LLM -->
+        <!-- Project 3: 9Router Cloud Infrastructure -->
         <div class="glass-card rounded-3xl p-6 flex flex-col justify-between group hover:-translate-y-2 transition-all duration-300 relative">
           <div class="space-y-4">
             <div class="w-full h-48 rounded-2xl bg-gradient-to-br from-purple-900/60 to-pink-900/40 border border-white/10 flex items-center justify-center relative overflow-hidden group-hover:border-purple-500/40 transition-colors">
-              <i data-lucide="cpu" class="w-16 h-16 text-purple-400/60 group-hover:scale-110 group-hover:text-purple-400 transition-all duration-500"></i>
+              <i data-lucide="network" class="w-16 h-16 text-purple-400/60 group-hover:scale-110 group-hover:text-purple-400 transition-all duration-500"></i>
               <div class="absolute top-4 right-4 bg-purple-500/20 backdrop-blur-md text-purple-300 text-xs px-3 py-1 rounded-full font-medium border border-purple-500/30">
-                DevOps
+                Cloud & DevOps
               </div>
             </div>
             
             <h3 class="font-heading text-2xl font-bold text-white group-hover:text-purple-300 transition-colors">
               9Router LLM Proxy Gateway
             </h3>
-            <p class="text-sm text-gray-400 line-clamp-3">
-              Deployment Docker LLM router di VPS AWS EC2 dengan integrasi multi-provider (Gemini, Minerva, OpenRouter) & Tailscale mesh VPN.
+            <p class="text-sm text-gray-400 leading-relaxed">
+              Arsitektur proxy router LLM berbasis Docker di AWS EC2, menghubungkan multi-provider (Gemini, OpenRouter, MinervaX) via jaringan privat Tailscale VPN.
             </p>
           </div>
 
           <div class="pt-6 mt-6 border-t border-white/5 flex items-center justify-between">
-            <div class="flex gap-2">
-              <span class="text-xs text-purple-400 font-semibold bg-purple-500/10 px-2.5 py-1 rounded-md">AWS VPS</span>
-              <span class="text-xs text-pink-400 font-semibold bg-pink-500/10 px-2.5 py-1 rounded-md">Docker</span>
+            <div class="flex flex-wrap gap-1.5">
+              <span class="text-[11px] text-purple-400 font-semibold bg-purple-500/10 px-2 py-0.5 rounded">AWS EC2</span>
+              <span class="text-[11px] text-pink-400 font-semibold bg-pink-500/10 px-2 py-0.5 rounded">Tailscale</span>
+              <span class="text-[11px] text-gray-400 font-semibold bg-white/5 px-2 py-0.5 rounded">Docker</span>
             </div>
-            <a href="#" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1 text-xs font-semibold">
-              Detail <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-            </a>
           </div>
         </div>
 
+      </div>
+    </section>
+
+
+    <!-- LIVE INFRASTRUCTURE / SKILLS SECTION -->
+    <section id="live-stack" class="py-24 px-6 relative max-w-7xl mx-auto">
+      <div class="glass-card rounded-3xl p-8 md:p-12 relative overflow-hidden">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          
+          <div class="lg:col-span-5 space-y-4">
+            <div class="inline-flex items-center gap-2 text-indigo-400 font-semibold text-sm tracking-wider uppercase">
+              <i data-lucide="terminal" class="w-4 h-4"></i> Technical Capabilities
+            </div>
+            <h2 class="font-heading text-3xl md:text-4xl font-bold text-white">
+              Tech Stack & Tooling Ecosystem
+            </h2>
+            <p class="text-gray-400 text-sm leading-relaxed">
+              Kombinasi teknologi yang rutin digunakan dalam siklus pengembangan, pengujian, dan deployment.
+            </p>
+          </div>
+
+          <div class="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-4">
+            
+            <div class="p-4 rounded-xl bg-white/5 border border-white/10 space-y-2">
+              <div class="text-indigo-400 font-mono text-xs font-semibold uppercase">Backend</div>
+              <div class="text-white font-medium text-sm">PHP 8.3 / Laravel 11</div>
+              <div class="text-xs text-gray-400">Node.js, Python FastAPI</div>
+            </div>
+
+            <div class="p-4 rounded-xl bg-white/5 border border-white/10 space-y-2">
+              <div class="text-purple-400 font-mono text-xs font-semibold uppercase">Data & Mining</div>
+              <div class="text-white font-medium text-sm">MySQL / SQLite</div>
+              <div class="text-xs text-gray-400">Apriori Algorithm, Pandas</div>
+            </div>
+
+            <div class="p-4 rounded-xl bg-white/5 border border-white/10 space-y-2">
+              <div class="text-emerald-400 font-mono text-xs font-semibold uppercase">Cloud & Infra</div>
+              <div class="text-white font-medium text-sm">AWS EC2 / VPS</div>
+              <div class="text-xs text-gray-400">Docker, Tailscale, Linux</div>
+            </div>
+
+            <div class="p-4 rounded-xl bg-white/5 border border-white/10 space-y-2">
+              <div class="text-sky-400 font-mono text-xs font-semibold uppercase">Frontend</div>
+              <div class="text-white font-medium text-sm">Tailwind CSS</div>
+              <div class="text-xs text-gray-400">Three.js, GSAP, Blade</div>
+            </div>
+
+            <div class="p-4 rounded-xl bg-white/5 border border-white/10 space-y-2">
+              <div class="text-amber-400 font-mono text-xs font-semibold uppercase">AI & LLM</div>
+              <div class="text-white font-medium text-sm">Hermes Agent</div>
+              <div class="text-xs text-gray-400">Prompting, MCP, 9Router</div>
+            </div>
+
+            <div class="p-4 rounded-xl bg-white/5 border border-white/10 space-y-2">
+              <div class="text-rose-400 font-mono text-xs font-semibold uppercase">Workflow</div>
+              <div class="text-white font-medium text-sm">Git & Obsidian</div>
+              <div class="text-xs text-gray-400">Laragon, VS Code, CI/CD</div>
+            </div>
+
+          </div>
+
+        </div>
       </div>
     </section>
 
@@ -379,15 +419,15 @@
         <div class="absolute -left-20 -bottom-20 w-60 h-60 bg-indigo-600/20 rounded-full blur-3xl pointer-events-none"></div>
 
         <div class="inline-flex items-center gap-2 text-indigo-400 font-semibold text-sm tracking-wider uppercase">
-          <i data-lucide="message-square" class="w-4 h-4"></i> Get In Touch
+          <i data-lucide="send" class="w-4 h-4"></i> Mari Terhubung
         </div>
 
         <h2 class="font-heading text-4xl md:text-5xl font-extrabold text-white tracking-tight">
-          Mari Bekerjasama Membuat Sesuatu Yang Luar Biasa!
+          Tertarik Berkolaborasi atau Diskusi Proyek?
         </h2>
 
         <p class="text-gray-300 max-w-xl mx-auto">
-          Tertarik membuat sistem web modern, otomatisasi AI, atau konsultasi teknologi? Silakan hubungi saya kapan saja.
+          Saya selalu terbuka untuk peluang baru di bidang Full-Stack Web Development, Data Science, atau AI Engineering.
         </p>
 
         <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -397,7 +437,7 @@
           </a>
           <a href="https://github.com" target="_blank" class="w-full sm:w-auto px-8 py-4 rounded-2xl border border-white/10 hover:bg-white/10 text-white font-semibold transition-all duration-300 flex items-center justify-center gap-3">
             <i data-lucide="github" class="w-5 h-5"></i>
-            <span>GitHub Profile</span>
+            <span>Lihat GitHub</span>
           </a>
         </div>
       </div>
@@ -406,10 +446,10 @@
     <!-- FOOTER -->
     <footer class="py-8 text-center text-xs text-gray-500 border-t border-white/5">
       <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div>© 2026 Han Nov. All rights reserved.</div>
+        <div>© 2026 Farhan (Han Nov). All rights reserved.</div>
         <div class="flex items-center gap-2">
-          <span>Designed with</span>
-          <span class="text-purple-400">Nya~ (=^･ω･^=)</span>
+          <span>Crafted with AI Precision</span>
+          <span class="text-purple-400">nya~ (=^･ω･^=)</span>
         </div>
       </div>
     </footer>
@@ -418,7 +458,6 @@
 
   <!-- 3D Scene Script (Three.js Motion Engine) -->
   <script>
-    // Initialize Lucide Icons
     lucide.createIcons();
 
     // Three.js Interactive Particle & Geometric Mesh Engine
@@ -466,7 +505,7 @@
     const particles = new THREE.Points(geometry, material);
     scene.add(particles);
 
-    // Wireframe Torus Knot Core Visual Object
+    // Torus Knot Visual
     const torusGeo = new THREE.TorusKnotGeometry(8, 2.5, 100, 16);
     const torusMat = new THREE.MeshBasicMaterial({
       color: 0x6366f1,
@@ -502,14 +541,12 @@
       requestAnimationFrame(animate);
       const elapsedTime = clock.getElapsedTime();
 
-      // Gentle rotation
       particles.rotation.y = elapsedTime * 0.03;
       particles.rotation.x = elapsedTime * 0.015;
 
       torusKnot.rotation.x = elapsedTime * 0.2;
       torusKnot.rotation.y = elapsedTime * 0.3;
 
-      // Mouse Parallax easing
       targetX += (mouseX - targetX) * 0.05;
       targetY += (mouseY - targetY) * 0.05;
 
