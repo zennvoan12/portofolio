@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="id" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Han Nov — Creative Developer & AI Engineer</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            heading: ['Syne', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#f0f3ff',
+              100: '#e1e7ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              900: '#1e1b4b',
+              glow: '#8b5cf6',
+            }
+          },
+          animation: {
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'float': 'float 6s ease-in-out infinite',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-15px)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Three.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- GSAP CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <style>
+    body {
+      background-color: #090a0f;
+      color: #f3f4f6;
+      overflow-x: hidden;
+    }
+
+    /* Glassmorphism */
+    .glass-card {
+      background: rgba(18, 20, 29, 0.6);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    }
+    
+    .glass-card:hover {
+      border-color: rgba(139, 92, 246, 0.4);
+      box-shadow: 0 12px 40px 0 rgba(139, 92, 246, 0.15);
+    }
+
+    .glass-nav {
+      background: rgba(9, 10, 15, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    /* Gradient Text */
+    .text-gradient {
+      background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 50%, #8b5cf6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .text-gradient-cyan {
+      background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #090a0f;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1f2937;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #4f46e5;
+    }
+
+    #webgl-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body class="relative font-sans antialiased selection:bg-purple-500 selection:text-white">
+
+  <!-- 3D WebGL Background Canvas -->
+  <canvas id="webgl-canvas"></canvas>
+
+  <!-- Background Ambient Lights -->
+  <div class="fixed top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-purple-600/20 rounded-full blur-[120px] pointer-events-none z-0"></div>
+  <div class="fixed bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-[30rem] h-[30rem] bg-indigo-600/15 rounded-full blur-[140px] pointer-events-none z-0"></div>
+
+  <!-- Navigation -->
+  <header class="fixed top-0 left-0 right-0 z-50 glass-nav transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <a href="#" class="font-heading font-extrabold text-2xl tracking-tight text-white flex items-center gap-2">
+        <span class="w-3 h-3 rounded-full bg-indigo-500 animate-pulse"></span>
+        HAN<span class="text-indigo-400">NOV</span>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
+        <a href="#about" class="hover:text-indigo-400 transition-colors">About</a>
+        <a href="#projects" class="hover:text-indigo-400 transition-colors">Projects</a>
+        <a href="#skills" class="hover:text-indigo-400 transition-colors">Tech Stack</a>
+        <a href="#contact" class="hover:text-indigo-400 transition-colors">Contact</a>
+      </nav>
+
+      <a href="#contact" class="px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/10 text-white text-sm font-semibold transition-all duration-300 hover:scale-105 backdrop-blur-md flex items-center gap-2">
+        <span>Let's Talk</span>
+        <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Content Wrapper -->
+  <main class="relative z-10 pt-20">
+
+    <!-- HERO SECTION -->
+    <section class="min-h-[90vh] flex items-center justify-center relative px-6 py-20">
+      <div class="max-w-4xl mx-auto text-center space-y-8">
+        
+        <!-- Status Badge -->
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border border-indigo-500/30 text-indigo-300 text-xs md:text-sm font-medium tracking-wide">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          </span>
+          Available for New Projects & Collaborations
+        </div>
+
+        <!-- Headline -->
+        <h1 class="font-heading font-extrabold text-5xl md:text-7xl lg:text-8xl tracking-tight leading-[1.1] text-gradient">
+          Crafting Digital Experience & AI Solutions
+        </h1>
+
+        <!-- Subheading -->
+        <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto font-normal leading-relaxed">
+          Full Stack Developer & AI Engineer specialize in high-performance web systems, modern user interfaces, and intelligent automation.
+        </p>
+
+        <!-- CTA Action Buttons -->
+        <div class="flex flex-wrap items-center justify-center gap-4 pt-4">
+          <a href="#projects" class="px-8 py-4 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold shadow-lg shadow-indigo-600/30 hover:shadow-indigo-500/50 transition-all duration-300 hover:-translate-y-1 flex items-center gap-3">
+            <span>Explore Work</span>
+            <i data-lucide="sparkles" class="w-5 h-5"></i>
+          </a>
+          <a href="#contact" class="px-8 py-4 rounded-2xl glass-card text-white font-semibold hover:bg-white/10 transition-all duration-300 hover:-translate-y-1 flex items-center gap-3">
+            <span>Get in Touch</span>
+            <i data-lucide="mail" class="w-5 h-5"></i>
+          </a>
+        </div>
+
+        <!-- Social Quick Links -->
+        <div class="flex items-center justify-center gap-6 pt-8 text-gray-400">
+          <a href="https://github.com" target="_blank" class="hover:text-white transition-colors p-2 glass-card rounded-xl">
+            <i data-lucide="github" class="w-5 h-5"></i>
+          </a>
+          <a href="https://linkedin.com" target="_blank" class="hover:text-white transition-colors p-2 glass-card rounded-xl">
+            <i data-lucide="linkedin" class="w-5 h-5"></i>
+          </a>
+          <a href="mailto:contact@quantum.com" class="hover:text-white transition-colors p-2 glass-card rounded-xl">
+            <i data-lucide="mail" class="w-5 h-5"></i>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="py-24 px-6 relative max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Bio Card -->
+        <div class="lg:col-span-7 space-y-6">
+          <div class="inline-flex items-center gap-2 text-indigo-400 font-semibold text-sm tracking-wider uppercase">
+            <i data-lucide="user" class="w-4 h-4"></i> About Me
+          </div>
+          <h2 class="font-heading text-4xl md:text-5xl font-bold text-white tracking-tight">
+            Driven by curiosity, powered by code.
+          </h2>
+          <p class="text-gray-300 text-base md:text-lg leading-relaxed">
+            Saya seorang pengembang perangkat lunak yang berfokus pada arsitektur web modern, integrasi kecerdasan buatan, dan optimasi algoritma. Dari sistem e-commerce berskala tinggi hingga integrasi agen LLM mandiri.
+          </p>
+
+          <!-- Highlights Grid -->
+          <div class="grid grid-cols-2 gap-4 pt-4">
+            <div class="glass-card p-5 rounded-2xl border-l-4 border-l-indigo-500">
+              <div class="text-3xl font-extrabold text-white font-heading">200+</div>
+              <div class="text-xs text-gray-400 mt-1">Transactions Processed</div>
+            </div>
+            <div class="glass-card p-5 rounded-2xl border-l-4 border-l-purple-500">
+              <div class="text-3xl font-extrabold text-white font-heading">99.9%</div>
+              <div class="text-xs text-gray-400 mt-1">Uptime Architecture</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Visual Interactive Badge Frame -->
+        <div class="lg:col-span-5 relative">
+          <div class="glass-card p-8 rounded-3xl relative overflow-hidden group">
+            <div class="absolute -right-10 -top-10 w-40 h-40 bg-indigo-500/20 rounded-full blur-3xl group-hover:bg-indigo-500/40 transition-all duration-500"></div>
+            
+            <div class="space-y-6 relative z-10">
+              <div class="w-16 h-16 rounded-2xl bg-indigo-600/30 border border-indigo-500/50 flex items-center justify-center text-indigo-300">
+                <i data-lucide="code-2" class="w-8 h-8"></i>
+              </div>
+              <h3 class="font-heading text-2xl font-bold text-white">Full-Stack Core</h3>
+              <p class="text-sm text-gray-400 leading-relaxed">
+                Spesialisasi mencakup Laravel 11, React/Next.js, Python AI Agents, MySQL/SQLite optimization, dan deployment cloud VPS.
+              </p>
+
+              <div class="flex flex-wrap gap-2 pt-2">
+                <span class="px-3 py-1 text-xs font-medium rounded-lg bg-white/5 border border-white/10 text-gray-300">Laravel 11</span>
+                <span class="px-3 py-1 text-xs font-medium rounded-lg bg-white/5 border border-white/10 text-gray-300">PHP 8.3</span>
+                <span class="px-3 py-1 text-xs font-medium rounded-lg bg-white/5 border border-white/10 text-gray-300">Python AI</span>
+                <span class="px-3 py-1 text-xs font-medium rounded-lg bg-white/5 border border-white/10 text-gray-300">Tailwind CSS</span>
+                <span class="px-3 py-1 text-xs font-medium rounded-lg bg-white/5 border border-white/10 text-gray-300">Docker</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- FEATURED PROJECTS SECTION -->
+    <section id="projects" class="py-24 px-6 relative max-w-7xl mx-auto">
+      <div class="text-center space-y-4 mb-16">
+        <div class="inline-flex items-center gap-2 text-indigo-400 font-semibold text-sm tracking-wider uppercase">
+          <i data-lucide="folder-git-2" class="w-4 h-4"></i> Portfolio Showcase
+        </div>
+        <h2 class="font-heading text-4xl md:text-5xl font-bold text-white">
+          Selected Projects & Case Studies
+        </h2>
+        <p class="text-gray-400 max-w-xl mx-auto">
+          Koleksi proyek nyata dengan fokus pada performa tinggi, UX intuitif, dan arsitektur bersih.
+        </p>
+      </div>
+
+      <!-- Project Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <!-- Project 1: Quantum Cell -->
+        <div class="glass-card rounded-3xl p-6 flex flex-col justify-between group hover:-translate-y-2 transition-all duration-300 relative">
+          <div class="space-y-4">
+            <div class="w-full h-48 rounded-2xl bg-gradient-to-br from-indigo-900/60 to-purple-900/40 border border-white/10 flex items-center justify-center relative overflow-hidden group-hover:border-indigo-500/40 transition-colors">
+              <i data-lucide="shopping-bag" class="w-16 h-16 text-indigo-400/60 group-hover:scale-110 group-hover:text-indigo-400 transition-all duration-500"></i>
+              <div class="absolute top-4 right-4 bg-indigo-500/20 backdrop-blur-md text-indigo-300 text-xs px-3 py-1 rounded-full font-medium border border-indigo-500/30">
+                E-Commerce
+              </div>
+            </div>
+            
+            <h3 class="font-heading text-2xl font-bold text-white group-hover:text-indigo-300 transition-colors">
+              Quantum Cell Store
+            </h3>
+            <p class="text-sm text-gray-400 line-clamp-3">
+              E-commerce modern berbasis Laravel 11 dengan rekomendasi produk pintar menggunakan Algoritma Apriori Data Mining.
+            </p>
+          </div>
+
+          <div class="pt-6 mt-6 border-t border-white/5 flex items-center justify-between">
+            <div class="flex gap-2">
+              <span class="text-xs text-indigo-400 font-semibold bg-indigo-500/10 px-2.5 py-1 rounded-md">Laravel</span>
+              <span class="text-xs text-purple-400 font-semibold bg-purple-500/10 px-2.5 py-1 rounded-md">Apriori</span>
+            </div>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1 text-xs font-semibold">
+              Detail <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 2: AI Autonomous Office -->
+        <div class="glass-card rounded-3xl p-6 flex flex-col justify-between group hover:-translate-y-2 transition-all duration-300 relative">
+          <div class="space-y-4">
+            <div class="w-full h-48 rounded-2xl bg-gradient-to-br from-emerald-900/60 to-teal-900/40 border border-white/10 flex items-center justify-center relative overflow-hidden group-hover:border-emerald-500/40 transition-colors">
+              <i data-lucide="bot" class="w-16 h-16 text-emerald-400/60 group-hover:scale-110 group-hover:text-emerald-400 transition-all duration-500"></i>
+              <div class="absolute top-4 right-4 bg-emerald-500/20 backdrop-blur-md text-emerald-300 text-xs px-3 py-1 rounded-full font-medium border border-emerald-500/30">
+                AI / Agents
+              </div>
+            </div>
+            
+            <h3 class="font-heading text-2xl font-bold text-white group-hover:text-emerald-300 transition-colors">
+              Hermes AI Office Manager
+            </h3>
+            <p class="text-sm text-gray-400 line-clamp-3">
+              Sistem agen kecerdasan buatan otonom untuk otomatisasi alur kerja kantor, integrasi Obsidian vault, dan pelaporan otomatis.
+            </p>
+          </div>
+
+          <div class="pt-6 mt-6 border-t border-white/5 flex items-center justify-between">
+            <div class="flex gap-2">
+              <span class="text-xs text-emerald-400 font-semibold bg-emerald-500/10 px-2.5 py-1 rounded-md">Python</span>
+              <span class="text-xs text-teal-400 font-semibold bg-teal-500/10 px-2.5 py-1 rounded-md">Hermes</span>
+            </div>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1 text-xs font-semibold">
+              Detail <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Project 3: 9Router Cloud LLM -->
+        <div class="glass-card rounded-3xl p-6 flex flex-col justify-between group hover:-translate-y-2 transition-all duration-300 relative">
+          <div class="space-y-4">
+            <div class="w-full h-48 rounded-2xl bg-gradient-to-br from-purple-900/60 to-pink-900/40 border border-white/10 flex items-center justify-center relative overflow-hidden group-hover:border-purple-500/40 transition-colors">
+              <i data-lucide="cpu" class="w-16 h-16 text-purple-400/60 group-hover:scale-110 group-hover:text-purple-400 transition-all duration-500"></i>
+              <div class="absolute top-4 right-4 bg-purple-500/20 backdrop-blur-md text-purple-300 text-xs px-3 py-1 rounded-full font-medium border border-purple-500/30">
+                DevOps
+              </div>
+            </div>
+            
+            <h3 class="font-heading text-2xl font-bold text-white group-hover:text-purple-300 transition-colors">
+              9Router LLM Proxy Gateway
+            </h3>
+            <p class="text-sm text-gray-400 line-clamp-3">
+              Deployment Docker LLM router di VPS AWS EC2 dengan integrasi multi-provider (Gemini, Minerva, OpenRouter) & Tailscale mesh VPN.
+            </p>
+          </div>
+
+          <div class="pt-6 mt-6 border-t border-white/5 flex items-center justify-between">
+            <div class="flex gap-2">
+              <span class="text-xs text-purple-400 font-semibold bg-purple-500/10 px-2.5 py-1 rounded-md">AWS VPS</span>
+              <span class="text-xs text-pink-400 font-semibold bg-pink-500/10 px-2.5 py-1 rounded-md">Docker</span>
+            </div>
+            <a href="#" class="text-gray-400 hover:text-white transition-colors flex items-center gap-1 text-xs font-semibold">
+              Detail <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="py-24 px-6 relative max-w-4xl mx-auto text-center">
+      <div class="glass-card rounded-3xl p-10 md:p-16 space-y-8 relative overflow-hidden">
+        <div class="absolute -left-20 -bottom-20 w-60 h-60 bg-indigo-600/20 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="inline-flex items-center gap-2 text-indigo-400 font-semibold text-sm tracking-wider uppercase">
+          <i data-lucide="message-square" class="w-4 h-4"></i> Get In Touch
+        </div>
+
+        <h2 class="font-heading text-4xl md:text-5xl font-extrabold text-white tracking-tight">
+          Mari Bekerjasama Membuat Sesuatu Yang Luar Biasa!
+        </h2>
+
+        <p class="text-gray-300 max-w-xl mx-auto">
+          Tertarik membuat sistem web modern, otomatisasi AI, atau konsultasi teknologi? Silakan hubungi saya kapan saja.
+        </p>
+
+        <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="mailto:admin@quantum.com" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold shadow-lg shadow-indigo-600/30 transition-all duration-300 hover:scale-105 flex items-center justify-center gap-3">
+            <i data-lucide="mail" class="w-5 h-5"></i>
+            <span>Kirim Email</span>
+          </a>
+          <a href="https://github.com" target="_blank" class="w-full sm:w-auto px-8 py-4 rounded-2xl border border-white/10 hover:bg-white/10 text-white font-semibold transition-all duration-300 flex items-center justify-center gap-3">
+            <i data-lucide="github" class="w-5 h-5"></i>
+            <span>GitHub Profile</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-8 text-center text-xs text-gray-500 border-t border-white/5">
+      <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div>© 2026 Han Nov. All rights reserved.</div>
+        <div class="flex items-center gap-2">
+          <span>Designed with</span>
+          <span class="text-purple-400">Nya~ (=^･ω･^=)</span>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- 3D Scene Script (Three.js Motion Engine) -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    // Three.js Interactive Particle & Geometric Mesh Engine
+    const canvas = document.getElementById('webgl-canvas');
+    const scene = new THREE.Scene();
+    
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 30;
+
+    const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    // Particle System
+    const particleCount = 700;
+    const geometry = new THREE.BufferGeometry();
+    const positions = new Float32Array(particleCount * 3);
+    const colors = new Float32Array(particleCount * 3);
+
+    const colorA = new THREE.Color('#6366f1'); // Indigo
+    const colorB = new THREE.Color('#8b5cf6'); // Purple
+
+    for (let i = 0; i < particleCount * 3; i += 3) {
+      positions[i] = (Math.random() - 0.5) * 80;
+      positions[i + 1] = (Math.random() - 0.5) * 80;
+      positions[i + 2] = (Math.random() - 0.5) * 80;
+
+      const mixedColor = colorA.clone().lerp(colorB, Math.random());
+      colors[i] = mixedColor.r;
+      colors[i + 1] = mixedColor.g;
+      colors[i + 2] = mixedColor.b;
+    }
+
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+    const material = new THREE.PointsMaterial({
+      size: 0.6,
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.7,
+      blending: THREE.AdditiveBlending
+    });
+
+    const particles = new THREE.Points(geometry, material);
+    scene.add(particles);
+
+    // Wireframe Torus Knot Core Visual Object
+    const torusGeo = new THREE.TorusKnotGeometry(8, 2.5, 100, 16);
+    const torusMat = new THREE.MeshBasicMaterial({
+      color: 0x6366f1,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.15
+    });
+    const torusKnot = new THREE.Mesh(torusGeo, torusMat);
+    torusKnot.position.set(20, -5, -10);
+    scene.add(torusKnot);
+
+    // Mouse Interaction
+    let mouseX = 0;
+    let mouseY = 0;
+    let targetX = 0;
+    let targetY = 0;
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = (e.clientX - window.innerWidth / 2) * 0.001;
+      mouseY = (e.clientY - window.innerHeight / 2) * 0.001;
+    });
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    // Animation Loop
+    const clock = new THREE.Clock();
+
+    function animate() {
+      requestAnimationFrame(animate);
+      const elapsedTime = clock.getElapsedTime();
+
+      // Gentle rotation
+      particles.rotation.y = elapsedTime * 0.03;
+      particles.rotation.x = elapsedTime * 0.015;
+
+      torusKnot.rotation.x = elapsedTime * 0.2;
+      torusKnot.rotation.y = elapsedTime * 0.3;
+
+      // Mouse Parallax easing
+      targetX += (mouseX - targetX) * 0.05;
+      targetY += (mouseY - targetY) * 0.05;
+
+      scene.rotation.y = targetX * 2;
+      scene.rotation.x = -targetY * 2;
+
+      renderer.render(scene, camera);
+    }
+
+    animate();
+
+    // GSAP ScrollTrigger Animations
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.from("#about", {
+      scrollTrigger: {
+        trigger: "#about",
+        start: "top 80%",
+      },
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      ease: "power3.out"
+    });
+
+    gsap.from("#projects .glass-card", {
+      scrollTrigger: {
+        trigger: "#projects",
+        start: "top 75%",
+      },
+      opacity: 0,
+      y: 40,
+      stagger: 0.2,
+      duration: 0.8,
+      ease: "power2.out"
+    });
+  </script>
+</body>
+</html>
